@@ -6,36 +6,41 @@ const betty = '/betty.png';
 const midnight = '/midnight-gospel.png';
 const good = '/the-good-place.png';
 const twilight = '/twilight-zone.png';
+const programasTv = [betty, midnight, twilight, good];
 
 // Creamos una clase usando como base React.Componente
 // para tener todo el uso
 class App extends Component {
-    constructor(props) {
-        // Enviamos info a super, es decir Component
-        // para que pueda construir un React Component
-        super(props);
-
-        // Inicializamos el estado en el constructor
-        this.state = { on: '' };
-
-        // Conectamos los metodos para que apunten
-        // siempre a nuestro componente
-        this.turnTvOn = this.turnTvOn.bind(this);
-    }
+    state = { on: '' };
 
     // Creamos un metodo en nuestra clase
-    turnTvOn() {
+    turnTvOn = () => {
         // El estado no lo debes modificar directamente
         // Usamos el metodo de los componentes "setState"
-        this.setState({ on: show });
+        if (this.state.on === '') {
+            this.setState({ on: show });
+        } else {
+            this.setState({ on: '' });
+        }
+
         // Le enviamos un objeto, con las propiedades que
         // queremos reemplazar
-    }
+    };
+
+    // metodo de cambio
+    changeShow = () => {
+        console.log('Este es el cambio de programa ->', Math.random());
+        const numeroAleatorio = Math.floor(Math.random() * 4);
+        if (this.state.on !== programasTv[numeroAleatorio] && this.state.on) {
+            this.setState({ on: programasTv[numeroAleatorio] });
+        }
+    };
 
     // Aquí es donde tendremos nuestro JSX
     // este metodo ya esta pre-establecido
     // en lo qué es un componente
     render() {
+        console.log('Este es el cambio del DOM->', Math.random());
         // Debemos hacer return del JSX
         return (
             <main>
@@ -48,7 +53,7 @@ class App extends Component {
                 </figure>
 
                 <button type="button" onClick={this.turnTvOn}>
-                    Prende la TV
+                    {this.state.on ? 'Apagar TV' : 'Encender TV'}
                 </button>
             </main>
         );
