@@ -4,7 +4,16 @@ import down from '../img/down.svg';
 import like from '../img/like.svg';
 import dislike from '../img/dislike.svg';
 
-const Movie = ({ name, score, description, year, cover, status }) => (
+const Movie = ({
+    name,
+    score,
+    description,
+    year,
+    cover,
+    status,
+    changeMovieStatus,
+    deleteMovie,
+}) => (
     <li>
         <figure>
             <img
@@ -19,10 +28,18 @@ const Movie = ({ name, score, description, year, cover, status }) => (
                     </h3>
                     {!status ? (
                         <>
-                            <button type="button">
+                            <button
+                                type="button"
+                                onClick={() => changeMovieStatus('like', name)}
+                            >
                                 <img src={up} alt="Vote up" />
                             </button>
-                            <button type="button">
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    changeMovieStatus('dislike', name)
+                                }
+                            >
                                 <img src={down} alt="Vote down" />
                             </button>
                         </>
@@ -42,10 +59,15 @@ const Movie = ({ name, score, description, year, cover, status }) => (
                 <figcaption>{description}</figcaption>
             </div>
         </figure>
-        <button type="button" className="delete">
-            ❌
+        <button
+            type="button"
+            className="delete"
+            onClick={() => deleteMovie(name)}
+        >
+            <span role="img" aria-label="delete">
+                ❌
+            </span>
         </button>
     </li>
 );
-
 export default Movie;

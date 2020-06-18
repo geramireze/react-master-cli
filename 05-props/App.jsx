@@ -19,7 +19,7 @@ const App = () => (
         <Child content="I'm a static content" />
         <Child content={`Time is ${new Date().getHours()} hours`} />
         <hr />
-        <Sum n1="10" n2="30" />
+        <Sum n1={10} n2={30} />
         <hr />
         <Operation value={10} operation={half} />
         <Operation value={10} operation={twice} />
